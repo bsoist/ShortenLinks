@@ -16,12 +16,12 @@ This does the following
 
 1. opens a CSV file containing all short strings and links I've created before
 2. if it finds the URL in the CSV file, it prints out the short string followed by my short domain
-3. if it doesn't, it finds a short string I've not used yet ( example XX )
+3. if it doesn't, it finds a short string I've not used yet ( example 07 )
 4. creates a folder in my cloud cannon site using that short string
 5. saves the URL and the short string to the CSV file
 6. builds some xhtml that will redirect to the URL I passed in
-7. saves that xhtml string to a file called index.html in the folder just created ( example XX/index.html )
-8. creates an apache2 redirect rule to send http://XX.bsoi.st to http://links.cloudvent.net/XX 
+7. saves that xhtml string to a file called index.html in the folder just created ( example 07/index.html )
+8. creates an apache2 redirect rule to send http://07.bsoi.st to http://links.cloudvent.net/07 
 9. saves that redirect string to a config file in my cloud cannon folder
 
 Another process ( grab_config.sh ) runs as a cron job on my server to keep looking for modifications to that config_file.txt and pull it down and restart apache.
