@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#This was written for a very specific purpose and works in very particular
+#circumstances. See README.md for more info
 import os, sys
 import urllib2, string, itertools, random, csv
 import settings
