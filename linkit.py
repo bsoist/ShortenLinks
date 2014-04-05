@@ -84,9 +84,10 @@ if not frag:
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
         print >>html_file, html_template % (url, url)
         html_file.close()
-        config_file = open("%s/config_file.txt" % links_folder, "a+")
-        print >>config_file, redirect_template % (frag, frag, frag)
-        config_file.close()
+        # I don't do it this way any more
+        #config_file = open("%s/config_file.txt" % links_folder, "a+")
+        #print >>config_file, redirect_template % (frag, frag, frag)
+        #config_file.close()
 
 print "%s.bsoi.st" % frag
 
