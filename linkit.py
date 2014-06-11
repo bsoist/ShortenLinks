@@ -24,7 +24,10 @@ html_template = """
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+"""
 
+# split this so that I don't have to escape all the % above
+html_template += """
   ga('create', '%s', 'cloudvent.net');
   ga('send', 'pageview');
 
