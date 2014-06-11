@@ -21,18 +21,15 @@ This does the following
 5. saves the URL and the short string to the CSV file
 6. builds some xhtml that will redirect to the URL I passed in
 7. saves that xhtml string to a file called index.html in the folder just created ( example 07/index.html )
-8. creates an apache2 redirect rule to send http://07.bsoi.st to http://links.cloudvent.net/07 
-9. saves that redirect string to a config file in my cloud cannon folder
-
-Another process ( grab_config.sh ) runs as a cron job on my server to keep looking for modifications to that config_file.txt and pull it down and restart apache.
 
 ## How YOU can use it
 This was written for use under very specific circumstances, but if you are interested in a similiar setup, this is what you need.
 
-1. root access a server that runs apache2
-2. some other website that serves content from a folder on the same machine on which you plan to create links
+1. root access to a server that runs apache2
+2. a wildcard rule that servers whatever.yourdomain.tld to /whatever on your cloudcannon site 
+3. some other website that serves content from a folder on the same machine on which you plan to create links
 
 
-I've created the settings.py file and added a variable to the top of grab_config.sh specifically so you could see what variables you would need to change to make this work for you, but this all assumes you use Apache2 and Cloud Cannon and Google Analytics. If you know enough about Apache and DNS, you should have enough to adjust other things if your situation is a little different. 
+I've created the settings.py file and added a variable to the top of grab_config.sh specifically so you could see what variables you would need to change to make this work for you, but this all assumes you use Cloud Cannon and Google Analytics. If you know enough about this stuff, you should have enough to adjust other things if your situation is a little different. 
 
 
