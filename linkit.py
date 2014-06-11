@@ -8,24 +8,6 @@ import settings
 links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_url)
 frag_length = settings.frag_length
 
-redirect_template = """
-<VirtualHost *:80>
-        ServerAdmin     %s
-        DocumentRoot    %s
-        ServerName      %%s.%s
-        ServerAlias     %%s.%s
-        RewriteEngine   On
-        RewriteRule     ^(.*)$ http://%s/%%s
-</VirtualHost>
-
-""" % (
-    settings.server_admin,
-    settings.document_root,
-    settings.short_domain,
-    settings.short_domain,
-    settings.cloud_cannon_url
-    )
-
 html_template = """
         <html>
 <head>
@@ -42,9 +24,7 @@ html_template = """
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-"""
 
-html_template += """
   ga('create', '%s', 'cloudvent.net');
   ga('send', 'pageview');
 
@@ -84,10 +64,6 @@ if not frag:
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
         print >>html_file, html_template % (url, url)
         html_file.close()
-        # I don't do it this way any more
-        #config_file = open("%s/config_file.txt" % links_folder, "a+")
-        #print >>config_file, redirect_template % (frag, frag, frag)
-        #config_file.close()
 
 print "%s.bsoi.st" % frag
 
