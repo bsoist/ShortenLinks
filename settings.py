@@ -1,4 +1,13 @@
 dropbox_location = "/Users/bill/Dropbox"
 cloud_cannon_url = "links.cloudvent.net"
 google_analytics_id = "UA-7456633-8"
+author = "Bill Soistmann"
+nickname = "bsoist"
+image = "me.png"
+email = "bsoist@whsjr.soistmann.com"
+facebook = nickname
+twitter = nickname
+start_date = "2014-01-01"
+html_file = "links.html"
+xml_file = "rss.xml"
 frag_length = 2

@@ -3,7 +3,7 @@
 #circumstances. See README.md for more info
 import os, sys
 import urllib2, string, itertools, random, csv
-import settings
+import settings, rsstemplate
 
 links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_url)
 frag_length = settings.frag_length
@@ -40,8 +40,9 @@ html_template += """
 
 try:
     url = sys.argv[1]
+    desc = sys.argv[2]
 except:
-    print "Usage: linkit <URL>"
+    print "Usage: linkit <URL> <DESC>";
     print links_folder
     sys.exit(1)
 
@@ -67,7 +68,14 @@ if not frag:
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
         print >>html_file, html_template % (url, url)
         html_file.close()
-
+"""
+xml_file = open("%s" % settings.xml_file, "w+")
+csv_file = open('%s/links.csv' % links_folder)
+entries = csv_file.readlines()[-20:]
+# iterate and create entries
+# save xml_file to links_folder
+print rsstemplate.rsstemplate % rsstemplate.entrytemplate
+"""
 print "%s.bsoi.st" % frag
 
 
