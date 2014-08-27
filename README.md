@@ -2,10 +2,10 @@
 This is a link shortening tool I use, and it works for me.
 
 It might seem obtuse to some, but you can read more about my reasoning at
-http://www.bsoi.st/oped/2014/03/08/howIShortenLinks
+http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html
 
 ## How it works
-I've written a [blog post][http://www.bsoi.st/oped/2014/03/08/howIShortenLinks] about why I set this up the way I did and I go into more detail there about how this works. The best way to understand with all of the backstory is to read below about how I use it.
+I've written a [blog post][http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html] about why I set this up the way I did and I go into more detail there about how this works. The best way to understand with all of the backstory is to read below about how I use it.
 
 ## How I use it
 I have a symbolic link in my PATH to the linkit.py script which I call linkit. When I want to create a link, I do this ...
