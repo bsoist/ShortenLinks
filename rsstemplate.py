@@ -14,11 +14,11 @@ details = {
     'pubDate': datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT"),
     'endDate': datetime.datetime.utcnow().strftime("%Y-%m-%d"),
     'localTime': datetime.datetime.utcnow().strftime("%m/%d/%Y; %I:%M:%S %p"),
+    'shortUrl': settings.short_url,
     'holder':'%s',
 }
 
-rsstemplate = '''
-<?xml version="1.0"?>
+rsstemplate = '''<?xml version="1.0"?>
 <rss version="2.0" xmlns:source="http://source.smallpict.com/2014/07/12/theSourceNamespace.html">
 	<channel>
 		<title>%(nickname)s&apos;s linkblog feed</title>
@@ -50,9 +50,9 @@ rsstemplate = '''
 entrytemplate = '''
 		<item>
 			<description>%(holder)s</description>
-			<link>%(holder)s</link>
+                        <link>http://%(holder)s.%(shortUrl)s</link>
 			<pubDate>%(pubDate)s</pubDate>
-			<guid>%(holder)s</guid>
+                        <guid>http://%(holder)s.%(shortUrl)s</guid>
 			<source:linkFull>%(holder)s</source:linkFull>
 		</item>
 ''' % details

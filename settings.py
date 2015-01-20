@@ -1,5 +1,6 @@
 dropbox_location = "/Users/bill/Dropbox"
-cloud_cannon_url = "links.cloudvent.net"
+cloud_cannon_url = "bsoistslinkblog"
+short_url = "bsoi.st"
 google_analytics_id = "UA-7456633-8"
 author = "Bill Soistmann"
 nickname = "bsoist"

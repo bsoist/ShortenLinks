@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #This was written for a very specific purpose and works in very particular
 #circumstances. See README.md for more info
-import os, sys
+import os, sys, shutil, time
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
 
@@ -47,7 +47,7 @@ except:
     sys.exit(1)
 
 csv_file = open('%s/links.csv' % links_folder)
-shorts = dict([(line[0],','.join(line[1:])) for line in list(csv.reader(csv_file))])
+shorts = dict([(line[0].lower(),line[1]) for line in list(csv.reader(csv_file))])
 shorts_reversed = dict(zip(shorts.values(),shorts.keys()))
 csv_file.close()
 
@@ -62,21 +62,18 @@ if not frag:
     else:
         frag = random.choice(available_frags)
         csv_file = open('%s/links.csv' % links_folder, "a+")
-        print >>csv_file, "%s,%s" % (frag,url)
+        print >>csv_file, "%s,%s,%s" % (frag,url,desc)
         csv_file.close()
         os.mkdir("%s/%s" % (links_folder, frag))
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
         print >>html_file, html_template % (url, url)
         html_file.close()
-"""
-xml_file = open("%s" % settings.xml_file, "w+")
+xml_file = open("%s/%s" % (links_folder, settings.xml_file), "w+")
 csv_file = open('%s/links.csv' % links_folder)
-entries = csv_file.readlines()[-20:]
-# iterate and create entries
-# save xml_file to links_folder
-print rsstemplate.rsstemplate % rsstemplate.entrytemplate
-"""
+entries = csv_file.readlines()[-30:]
+entries.reverse()
+print >>xml_file, rsstemplate.rsstemplate % "\n".join(
+        [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(',') for entry in entries]]
+    )
 print "%s.bsoi.st" % frag
-
-
 
