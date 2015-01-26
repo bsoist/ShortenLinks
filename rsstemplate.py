@@ -1,3 +1,6 @@
+#This was written for a very specific purpose and works in very particular
+#circumstances. See README.md for more info
+
 import datetime, settings
 
 details = {

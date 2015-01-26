@@ -1,3 +1,5 @@
+#This was written for a very specific purpose and works in very particular
+#circumstances. See README.md for more info
 dropbox_location = "/Users/bill/Dropbox"
 cloud_cannon_url = "bsoistslinkblog"
 short_url = "bsoi.st"

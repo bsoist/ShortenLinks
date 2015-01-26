@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-"""
-See README for information on how this is used.
-"""
+#This was written for a very specific purpose and works in very particular
+#circumstances. See README.md for more info
 import os
 
 print """Location: http://links.cloudvent.net/%s
