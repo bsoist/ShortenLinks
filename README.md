@@ -30,4 +30,4 @@ This was written for use under very specific circumstances, but if you are inter
 I've created the settings.py file specifically so you could see what variables you would need to change to make this work for you, but this all assumes you use Cloud Cannon and Google Analytics. If you know enough about this stuff, you should have enough to adjust other things if your situation is a little different. 
 
 [newdoc]: http://www.bsoi.st/2015/01/26/shortening-links/
-[olddoc]: http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html 
+[olddoc]: http://www.bsoi.st/2014/03/08/how-i-shorten-links/
