@@ -1,11 +1,10 @@
 # Link Shortener 
 This is a link shortening tool I use, and it works for me.
 
-It might seem obtuse to some, but you can read more about my reasoning at
-http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html
+It might seem obtuse to some. If you want to know more about why I do things this way, [start here][newdoc].
 
 ## How it works
-I've written a [blog post][http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html] about why I set this up the way I did and I go into more detail there about how this works. The best way to understand with all of the backstory is to read below about how I use it.
+I've written a couple of blog posts ( [here][newdoc] and [here][olddoc] ) about why I set this up the way I did and I go into more detail there about how this works. The best way to understand with all of the backstory is to read below about how I use it.
 
 ## How I use it
 I have a symbolic link in my PATH to the linkit.py script which I call linkit. When I want to create a link, I do this ...
@@ -26,10 +25,9 @@ This does the following
 This was written for use under very specific circumstances, but if you are interested in a similiar setup, this is what you need.
 
 1. root access to a server that runs apache2
-2. a wildcard rule that servers whatever.yourdomain.tld to /whatever on your cloudcannon site 
-3. some other website that serves content from a folder on the same machine on which you plan to create links
+2. a wildcard rule that servers whatever.yourdomain.tld to /whatever/ on your cloudcannon site 
 
+I've created the settings.py file specifically so you could see what variables you would need to change to make this work for you, but this all assumes you use Cloud Cannon and Google Analytics. If you know enough about this stuff, you should have enough to adjust other things if your situation is a little different. 
 
-I've created the settings.py file and added a variable to the top of grab_config.sh specifically so you could see what variables you would need to change to make this work for you, but this all assumes you use Cloud Cannon and Google Analytics. If you know enough about this stuff, you should have enough to adjust other things if your situation is a little different. 
-
-
+[newdoc]: http://www.bsoi.st/2015/01/26/shortening-links/
+[olddoc]: http://www.bsoi.st/oped/2014/03/08/howIShortenLinks.html 
