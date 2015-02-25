@@ -4,8 +4,9 @@
 import os, sys, shutil, time
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
+import folder2s3
 
-links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_url)
+links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_folder)
 frag_length = settings.frag_length
 
 html_template = """
@@ -68,7 +69,8 @@ if not frag:
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
         print >>html_file, html_template % (url, url)
         html_file.close()
-xml_file = open("%s/%s" % (links_folder, settings.xml_file), "w+")
+xml_filename = "%s/%s" % (links_folder, settings.xml_file)
+xml_file = open(xml_filename, "w+")
 csv_file = open('%s/links.csv' % links_folder)
 entries = csv_file.readlines()[-30:]
 entries.reverse()
@@ -76,4 +78,12 @@ print >>xml_file, rsstemplate.rsstemplate % "\n".join(
         [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(',') for entry in entries]]
     )
 print "%s.bsoi.st" % frag
+
+bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
+from boto.s3.key import Key
+key = Key(bucket)
+key.key = "feed.xml"
+key.set_contents_from_filename(xml_filename)
+key.set_acl("public-read")
+key.copy(bucket,key.key, preserve_acl=True, metadata={'Content-type': 'text/xml'})
 
