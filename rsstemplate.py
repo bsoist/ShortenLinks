@@ -49,10 +49,21 @@ rsstemplate = '''<?xml version="1.0"?>
 </rss>
 ''' % details
 
-
 entrytemplate = '''
 		<item>
 			<description>%(holder)s</description>
+                        <link>http://%(holder)s.%(shortUrl)s</link>
+			<pubDate>%(pubDate)s</pubDate>
+                        <guid>http://%(holder)s.%(shortUrl)s</guid>
+			<source:linkFull>%(holder)s</source:linkFull>
+		</item>
+''' % details
+
+# REDEFINING FOR FeedBurner MOVE
+entrytemplate = '''
+		<item>
+			<title>%(holder)s</title>
+            <description>This feed is dying. Please visit http://rssmove.bsoi.st/ to subscribe to the new feed which is available now.</description>
                         <link>http://%(holder)s.%(shortUrl)s</link>
 			<pubDate>%(pubDate)s</pubDate>
                         <guid>http://%(holder)s.%(shortUrl)s</guid>

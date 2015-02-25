@@ -77,14 +77,14 @@ entries.reverse()
 print >>xml_file, rsstemplate.rsstemplate % "\n".join(
         [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(',') for entry in entries]]
     )
+xml_file.close()
 print "%s.bsoi.st" % frag
 
-# new stuff
 bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
 from boto.s3.key import Key
 key = Key(bucket)
 key.key = "feed.xml"
-key.set_contents_from_filename(xml_filename)
+xml_file = open(xml_filename)
+key.set_contents_from_file(xml_file)
 key.set_acl("public-read")
-key.copy(bucket,key.key, preserve_acl=True, metadata={'Content-type': 'text/xml'})
 
