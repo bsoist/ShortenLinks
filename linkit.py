@@ -79,6 +79,7 @@ print >>xml_file, rsstemplate.rsstemplate % "\n".join(
     )
 print "%s.bsoi.st" % frag
 
+# new stuff
 bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
 from boto.s3.key import Key
 key = Key(bucket)
