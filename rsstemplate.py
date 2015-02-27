@@ -63,7 +63,7 @@ entrytemplate = '''
 entrytemplate = '''
 		<item>
 			<title>%(holder)s</title>
-            <description>This feed is dying. Please visit http://rssmove.bsoi.st/ to subscribe to the new feed which is available now.</description>
+            <description>The feedburner version of this feed is dying. If you've not already done so, please visit http://rssmove.bsoi.st/ to subscribe to the new feed which is available now (and will still have this message until end of March).</description>
                         <link>http://%(holder)s.%(shortUrl)s</link>
 			<pubDate>%(pubDate)s</pubDate>
                         <guid>http://%(holder)s.%(shortUrl)s</guid>
