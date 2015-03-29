@@ -7,6 +7,7 @@ import settings, rsstemplate
 import folder2s3
 
 links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_folder)
+
 frag_length = settings.frag_length
 
 html_template = """
@@ -48,7 +49,8 @@ except:
     sys.exit(1)
 
 csv_file = open('%s/links.csv' % links_folder)
-shorts = dict([(line[0].lower(),line[1]) for line in list(csv.reader(csv_file))])
+shorts = dict([(part[0].lower(),part[1][:-1]) for part in [line.split(';') for line in csv_file]])
+sys.exit()
 shorts_reversed = dict(zip(shorts.values(),shorts.keys()))
 csv_file.close()
 
@@ -63,7 +65,7 @@ if not frag:
     else:
         frag = random.choice(available_frags)
         csv_file = open('%s/links.csv' % links_folder, "a+")
-        print >>csv_file, "%s,%s,%s" % (frag,url,desc)
+        print >>csv_file, "%s;%s;%s" % (frag,url,desc)
         csv_file.close()
         os.mkdir("%s/%s" % (links_folder, frag))
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
