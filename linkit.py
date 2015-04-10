@@ -50,7 +50,6 @@ except:
 
 csv_file = open('%s/links.csv' % links_folder)
 shorts = dict([(part[0].lower(),part[1][:-1]) for part in [line.split(';') for line in csv_file]])
-sys.exit()
 shorts_reversed = dict(zip(shorts.values(),shorts.keys()))
 csv_file.close()
 
