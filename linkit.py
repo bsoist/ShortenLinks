@@ -56,9 +56,10 @@ except:
     sys.exit(1)
 
 csv_file = open('%s/links.csv' % links_folder)
-shorts = dict([(part[0].lower(),part[1][:-1]) for part in [line.split(';') for line in csv_file]])
+shorts = dict([(part[0].lower(),part[1]) for part in [line.split(';') for line in csv_file]])
 shorts_reversed = dict(zip(shorts.values(),shorts.keys()))
 csv_file.close()
+
 
 frag = shorts_reversed.get(url,None)
 
@@ -88,11 +89,12 @@ print >>xml_file, rsstemplate.rsstemplate % "\n".join(
 xml_file.close()
 print "%s.bsoi.st" % frag
 
-bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
+bucket = folder2s3.getBucket("notes.bsoi.st","bsoist")
+sys.exit()
 from boto.s3.key import Key
 key = Key(bucket)
 key.key = "feed.xml"
-xml_file = open(xml_filename)
-key.set_contents_from_file(xml_file)
+key.set_contents_from_filename(xml_filename)
 key.set_acl("public-read")
+key.copy(bucket,key.key, preserve_acl=True, metadata={'Content-type': 'text/xml'})
 
