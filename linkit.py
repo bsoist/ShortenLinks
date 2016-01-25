@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 #This was written for a very specific purpose and works in very particular
 #circumstances. See README.md for more info
+
+
 import os, sys, shutil, time
+
+# add my bin to python path
+home_folder = os.environ.get("HOME")
+sys.path.append(os.path.join(home_folder,"bin"))
+
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
 import folder2s3
@@ -76,7 +83,7 @@ csv_file = open('%s/links.csv' % links_folder)
 entries = csv_file.readlines()[-30:]
 entries.reverse()
 print >>xml_file, rsstemplate.rsstemplate % "\n".join(
-        [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(',') for entry in entries]]
+        [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(';') for entry in entries]]
     )
 xml_file.close()
 print "%s.bsoi.st" % frag
