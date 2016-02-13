@@ -9,7 +9,7 @@ home_folder = os.environ.get("HOME")
 
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
-import folder2s3
+from projects import folder2s3
 
 links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_folder)
 
