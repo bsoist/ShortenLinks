@@ -2,12 +2,10 @@
 #This was written for a very specific purpose and works in very particular
 #circumstances. See README.md for more info
 
-
 import os, sys, shutil, time
 
 # add my bin to python path
 home_folder = os.environ.get("HOME")
-sys.path.append(os.path.join(home_folder,"bin"))
 
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
