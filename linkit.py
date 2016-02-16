@@ -87,8 +87,7 @@ print >>xml_file, rsstemplate.rsstemplate % "\n".join(
 xml_file.close()
 print "%s.bsoi.st" % frag
 
-bucket = folder2s3.getBucket("notes.bsoi.st","bsoist")
-sys.exit()
+bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
 from boto.s3.key import Key
 key = Key(bucket)
 key.key = "feed.xml"
