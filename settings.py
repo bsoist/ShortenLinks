@@ -2,7 +2,8 @@
 #circumstances. See README.md for more info
 import os
 
-dropbox_location = os.path.join(os.environ["HOME"], "Dropbox")
+home_folder = os.environ.get("home") or os.environ.get("homepath")
+dropbox_location = os.path.join(home_folder, "Dropbox")
 cloud_cannon_url = "links.cloudvent.net"
 cloud_cannon_folder = "bsoistslinkblog"
 short_url = "bsoi.st"

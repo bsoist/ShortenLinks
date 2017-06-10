@@ -4,8 +4,6 @@
 
 import os, sys, shutil, time
 
-# add my bin to python path
-home_folder = os.environ.get("HOME")
 
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
