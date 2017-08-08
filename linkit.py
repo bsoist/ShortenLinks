@@ -68,7 +68,7 @@ if not frag:
     else:
         frag = random.choice(available_frags)
         csv_file = open('%s/links.csv' % links_folder, "a+")
-        print >>csv_file, "%s;%s;%s" % (frag,url,desc)
+        csv_file.write("%s;%s;%s" % (frag,url,desc))
         csv_file.close()
         os.mkdir("%s/%s" % (links_folder, frag))
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
@@ -93,3 +93,5 @@ key.set_contents_from_filename(xml_filename)
 key.set_acl("public-read")
 key.copy(bucket,key.key, preserve_acl=True, metadata={'Content-type': 'text/xml'})
 
+
+import buildhtml
