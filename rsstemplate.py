@@ -25,17 +25,17 @@ rsstemplate = '''<?xml version="1.0"?>
 <rss version="2.0" xmlns:source="http://source.smallpict.com/2014/07/12/theSourceNamespace.html">
 	<channel>
 		<title>%(nickname)s&apos;s linkblog feed</title>
-        <link>%(html_link)s</link>
+	<link>%(html_link)s</link>
 		<description>%(nickname)s&apos;s linkblog.</description>
 		<language>en-us</language>
 		<pubDate>%(pubDate)s</pubDate>
 		<lastBuildDate>%(pubDate)s</lastBuildDate>
-                <generator>https://github.com/bsoist/ShortenLinks</generator>
+		<generator>https://github.com/bsoist/ShortenLinks</generator>
 		<docs>http://cyber.law.harvard.edu/rss/rss.html</docs>
 		<webMaster>%(email)s (%(author)s)</webMaster>
 		<source:account service="facebook">%(facebook)s</source:account>
 		<source:account service="twitter">%(twitter)s</source:account>
-        <source:avatar>%(pic)s</source:avatar>
+	<source:avatar>%(pic)s</source:avatar>
 		<cloud domain="rpc.rsscloud.org" port="5337" path="/rsscloud/pleaseNotify" registerProcedure="" protocol="http-post" />
 		<source:archive>
 			<source:url>%(archive)s</source:url>
@@ -44,7 +44,7 @@ rsstemplate = '''<?xml version="1.0"?>
 			<source:endDay>%(endDate)s</source:endDay>
 		</source:archive>
 		<source:localTime>%(localTime)s</source:localTime>
-                %(holder)s
+		%(holder)s
 	</channel>
 </rss>
 ''' % details
@@ -52,9 +52,9 @@ rsstemplate = '''<?xml version="1.0"?>
 entrytemplate = '''
 		<item>
 			<description>%(holder)s</description>
-                        <link>http://%(holder)s.%(shortUrl)s</link>
+			<link>http://%(holder)s.%(shortUrl)s</link>
 			<pubDate>%(pubDate)s</pubDate>
-                        <guid>http://%(holder)s.%(shortUrl)s</guid>
+			<guid>http://%(holder)s.%(shortUrl)s</guid>
 			<source:linkFull>%(holder)s</source:linkFull>
 		</item>
 ''' % details
@@ -63,10 +63,10 @@ entrytemplate = '''
 entrytemplate = '''
 		<item>
 			<title>%(holder)s</title>
-            <description>The feedburner version of this feed is dying. If you've not already done so, please visit http://rssmove.bsoi.st/ to subscribe to the new feed which is available now (and will still have this message until end of March).</description>
-                        <link>http://%(holder)s.%(shortUrl)s</link>
+			<description>%(holder)s</description>
+			<link>http://%(holder)s.%(shortUrl)s</link>
 			<pubDate>%(pubDate)s</pubDate>
-                        <guid>http://%(holder)s.%(shortUrl)s</guid>
+			<guid>http://%(holder)s.%(shortUrl)s</guid>
 			<source:linkFull>%(holder)s</source:linkFull>
 		</item>
 ''' % details

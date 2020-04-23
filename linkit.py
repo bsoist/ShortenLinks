@@ -1,13 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 #This was written for a very specific purpose and works in very particular
 #circumstances. See README.md for more info
 
 import os, sys, shutil, time
-
-
 import urllib2, string, itertools, random, csv
 import settings, rsstemplate
-from projects import folder2s3
+sys.path.append('/Users/bill/code/github')
+import folder2s3
 
 links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_folder)
 
@@ -42,14 +41,18 @@ html_template += """
 </html>
 """ % settings.google_analytics_id
 
-
 try:
     url = sys.argv[1]
     desc = sys.argv[2]
 except:
-    print "Usage: linkit <URL> <DESC>";
+    print "Usage: linkit <URL> <DESC> [<COMMENT>]"
     print links_folder
     sys.exit(1)
+
+try:
+    comment = sys.argv[3]
+except:
+    comment = ''
 
 csv_file = open('%s/links.csv' % links_folder)
 shorts = dict([(part[0].lower(),part[1]) for part in [line.split(';') for line in csv_file]])
@@ -68,7 +71,9 @@ if not frag:
     else:
         frag = random.choice(available_frags)
         csv_file = open('%s/links.csv' % links_folder, "a+")
-        csv_file.write("%s;%s;%s" % (frag,url,desc))
+        csv_line = "%s;%s;%s;%s" % (frag, url, desc, comment)
+        print csv_line
+        print >>csv_file, csv_line
         csv_file.close()
         os.mkdir("%s/%s" % (links_folder, frag))
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
@@ -79,8 +84,14 @@ xml_file = open(xml_filename, "w+")
 csv_file = open('%s/links.csv' % links_folder)
 entries = csv_file.readlines()[-30:]
 entries.reverse()
+entry_tuples = []
+for e in [entry.strip().split(';') for entry in entries]:
+    e_code, e_url, e_title, e_desc = e
+    if not e_desc:
+        e_desc = e_title
+    entry_tuples.append((e_title, e_desc, e_code, e_code, e_url))
 print >>xml_file, rsstemplate.rsstemplate % "\n".join(
-        [rsstemplate.entrytemplate % (e[2], e[0], e[0], e[1]) for e in [entry[:-1].split(';') for entry in entries]]
+        [rsstemplate.entrytemplate % e for e in entry_tuples]
     )
 xml_file.close()
 print "%s.bsoi.st" % frag
