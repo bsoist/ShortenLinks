@@ -16,6 +16,7 @@ def build_html():
     lines = data.split("\n")
     link_tuples = []
     for line in reversed(lines[12:-1]):
+        print(line)
         link_code, link_url, link_title, link_comment = line.split(';')
         if link_comment == link_title:
             link_comment = ''
@@ -28,5 +29,4 @@ def build_html():
             )
         )
 
-build_html()
 

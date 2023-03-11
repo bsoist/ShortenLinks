@@ -107,3 +107,4 @@ if new_frag:
     subprocess.call(['git', 'commit', '-m', f'Add {frag} short url'])
     subprocess.call('git push'.split())
     import buildhtml
+    buildhtml.build_html()
