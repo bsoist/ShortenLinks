@@ -3,9 +3,8 @@
 import os
 
 home_folder = os.environ.get("HOME") or os.environ.get("HOMEPATH")
-dropbox_location = os.path.join(home_folder, "Dropbox")
-cloud_cannon_url = "links.cloudvent.net"
-cloud_cannon_folder = "bsoistslinkblog"
+links_folder = os.path.join(home_folder, 'code', 'bsoist.github.io', 'links')
+
 short_url = "bsoi.st"
 google_analytics_id = "UA-7456633-8"
 author = "Bill Soistmann"

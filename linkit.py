@@ -1,14 +1,17 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #This was written for a very specific purpose and works in very particular
 #circumstances. See README.md for more info
 
-import os, sys, shutil, time
-import urllib2, string, itertools, random, csv
+import os
+import shutil
+import subprocess
+import sys
+import time
+import urllib.request, urllib.error, urllib.parse, string, itertools, random, csv
 import settings, rsstemplate
-sys.path.append('/Users/bill/code/github')
-import folder2s3
+from subprocess import call
 
-links_folder = os.path.join(settings.dropbox_location, "Apps", "Cloud Cannon", settings.cloud_cannon_folder)
+links_folder = settings.links_folder
 
 frag_length = settings.frag_length
 
@@ -45,8 +48,8 @@ try:
     url = sys.argv[1]
     desc = sys.argv[2]
 except:
-    print "Usage: linkit <URL> <DESC> [<COMMENT>]"
-    print links_folder
+    print("Usage: linkit <URL> <DESC> [<COMMENT>]")
+    print(links_folder)
     sys.exit(1)
 
 try:
@@ -56,28 +59,30 @@ except:
 
 csv_file = open('%s/links.csv' % links_folder)
 shorts = dict([(part[0].lower(),part[1]) for part in [line.split(';') for line in csv_file]])
-shorts_reversed = dict(zip(shorts.values(),shorts.keys()))
+shorts_reversed = dict(list(zip(list(shorts.values()),list(shorts.keys()))))
 csv_file.close()
 
 
+new_frag = False
 frag = shorts_reversed.get(url,None)
 
 if not frag:
-    possible_frags = set(["%s%s" % frag for frag in itertools.permutations(string.lowercase + string.digits, frag_length)])
-    used_frags = set([f for f in os.listdir(links_folder) if '.' not in f] + shorts.keys())
+    new_frag = True
+    possible_frags = set(["%s%s" % frag for frag in itertools.permutations(string.ascii_lowercase + string.digits, frag_length)])
+    used_frags = set([f for f in os.listdir(links_folder) if '.' not in f] + list(shorts.keys()))
     available_frags = list(possible_frags - used_frags)
     if len(available_frags) < 1:
-        print "Time to adjust frag_length to %s" % (frag_length + 1)
+        print("Time to adjust frag_length to %s" % (frag_length + 1))
     else:
         frag = random.choice(available_frags)
         csv_file = open('%s/links.csv' % links_folder, "a+")
         csv_line = "%s;%s;%s;%s" % (frag, url, desc, comment)
-        print csv_line
-        print >>csv_file, csv_line
+        print(csv_line)
+        print(csv_line, file=csv_file)
         csv_file.close()
         os.mkdir("%s/%s" % (links_folder, frag))
         html_file = open("%s/%s/index.html" % (links_folder, frag), "w+")
-        print >>html_file, html_template % (url, url)
+        print(html_template % (url, url), file=html_file)
         html_file.close()
 xml_filename = "%s/%s" % (links_folder, settings.xml_file)
 xml_file = open(xml_filename, "w+")
@@ -86,23 +91,19 @@ entries = csv_file.readlines()[-30:]
 entries.reverse()
 entry_tuples = []
 for e in [entry.strip().split(';') for entry in entries]:
+    print(e)
     e_code, e_url, e_title, e_desc = e
     if not e_desc:
         e_desc = e_title
     entry_tuples.append((e_title, e_desc, e_code, e_code, e_url))
-print >>xml_file, rsstemplate.rsstemplate % "\n".join(
+print(rsstemplate.rsstemplate % "\n".join(
         [rsstemplate.entrytemplate % e for e in entry_tuples]
-    )
+    ), file=xml_file)
 xml_file.close()
-print "%s.bsoi.st" % frag
+print("%s.bsoi.st" % frag)
 
-bucket = folder2s3.getBucket("links.bsoi.st","bsoist")
-from boto.s3.key import Key
-key = Key(bucket)
-key.key = "feed.xml"
-key.set_contents_from_filename(xml_filename)
-key.set_acl("public-read")
-key.copy(bucket,key.key, preserve_acl=True, metadata={'Content-type': 'text/xml'})
-
-
-import buildhtml
+if new_frag:
+    subprocess.call('git add links'.split())
+    subprocess.call(['git', 'commit', '-m', f'Add {frag} short url'])
+    subprocess.call('git push'.split())
+    import buildhtml
