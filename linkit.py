@@ -11,7 +11,7 @@ import urllib.request, urllib.error, urllib.parse, string, itertools, random, cs
 import settings, rsstemplate
 from subprocess import call
 
-links_folder = settings.links_folder
+links_folder = os.path.join(settings.blog_folder, 'links')
 
 frag_length = settings.frag_length
 
@@ -103,8 +103,9 @@ xml_file.close()
 print("%s.bsoi.st" % frag)
 
 if new_frag:
+    import buildhtml
+    buildhtml.build_html()
+    os.chdir(settings.blog_folder)
     subprocess.call('git add links'.split())
     subprocess.call(['git', 'commit', '-m', f'Add {frag} short url'])
     subprocess.call('git push'.split())
-    import buildhtml
-    buildhtml.build_html()

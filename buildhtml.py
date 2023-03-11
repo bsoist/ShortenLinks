@@ -6,12 +6,12 @@ from boto.s3.key import Key
 html_template = """<ul id="linkblog">\n%s\n</ul>"""
 link_template = '<li><a href="http://%s.bsoi.st" target="_blank">%s</a>%s</li>'
 
-links_folder = settings.links_folder
+links_folder = os.path.join(settings.blog_folder, 'links')
 
 def build_html():
     global DEBUG
-    csv_file = open("%s/links.csv" % links_folder)
-    html_file = open("links.html", "w+")
+    csv_file = open(f"{links_folder}/links.csv")
+    html_file = open(f"{links_folder}/links.html", "w+")
     data = csv_file.read()
     lines = data.split("\n")
     link_tuples = []

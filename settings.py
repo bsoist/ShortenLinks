@@ -3,7 +3,7 @@
 import os
 
 home_folder = os.environ.get("HOME") or os.environ.get("HOMEPATH")
-links_folder = os.path.join(home_folder, 'code', 'bsoist.github.io', 'links')
+blog_folder = os.path.join(home_folder, 'code', 'bsoist.github.io')
 
 short_url = "bsoi.st"
 google_analytics_id = "UA-7456633-8"
