@@ -3,7 +3,7 @@
 #circumstances. See README.md for more info
 import os
 
-print """Location: http://links.cloudvent.net/%s
+print("""Location: http://links.cloudvent.net/%s
 
-""" % os.environ['HTTP_HOST'].split('.')[0]
+""" % os.environ['HTTP_HOST'].split('.')[0])
 
